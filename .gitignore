@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PDF 输出（可由脚本生成）
+*.pdf
+
+# 二维码（私有资源）
+qrcode.jpg
