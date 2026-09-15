@@ -11,8 +11,16 @@ import re
 import markdown
 from pathlib import Path
 
+
 # 设置 weasyprint 需要的库路径（macOS Homebrew）
-os.environ.setdefault('DYLD_LIBRARY_PATH', '/opt/homebrew/lib')
+# os.environ.setdefault('DYLD_LIBRARY_PATH', '/opt/homebrew/lib')
+# os.environ["WEASYPRINT_DLL_DIRECTORIES"] = r"C:\\Program Files\\GTK3-Runtime Win64\\bin"
+gtk_path = r"C:\Program Files\GTK3-Runtime Win64\bin"
+if hasattr(os, 'add_dll_directory'):
+    os.add_dll_directory(gtk_path)
+else:
+# 旧版 Python 的兼容写法
+    os.environ['PATH'] = gtk_path + os.pathsep + os.environ['PATH']
 
 from weasyprint import HTML, CSS
 from weasyprint.text.fonts import FontConfiguration
@@ -551,8 +559,8 @@ def generate_pdf(input_dir, output_path):
 
 
 if __name__ == '__main__':
-    input_directory = '/Users/jwangkun/Test/hermes/whitepaper'
-    output_file = '/Users/jwangkun/Test/hermes/whitepaper/Hermes-Agent白皮书-养马从入门到精通-鲲鹏Talk.pdf'
+    input_directory = r'D:\00.Cached\ProgrammingProject\hermes-agent-guide-main'
+    output_file = r'D:\00.Cached\ProgrammingProject\hermes-agent-guide-main\Hermes-Agent白皮书-养马从入门到精通-鲲鹏Talk.pdf'
     
     try:
         generate_pdf(input_directory, output_file)
